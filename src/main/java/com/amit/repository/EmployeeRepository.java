@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.amit.entity.EmployeeEntity;
+import com.amit.repository.custom.EmployeeCustomRepository;
 
 @Repository
-public interface EmployeeRepository
-		extends JpaRepository<EmployeeEntity, Integer>, JpaSpecificationExecutor<EmployeeEntity> {
+public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer>,
+		JpaSpecificationExecutor<EmployeeEntity>, EmployeeCustomRepository {
 
 	public Optional<EmployeeEntity> findByEmployeeEmail(String email);
 

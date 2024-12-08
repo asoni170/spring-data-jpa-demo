@@ -26,6 +26,7 @@ import com.amit.entity.EmployeeEntity;
 import com.amit.exception.EmployeeAlreadyExistsException;
 import com.amit.exception.MissingMandetoryFieldException;
 import com.amit.exception.NoEmployeeFoundException;
+import com.amit.exception.ResourceNotFoundException;
 import com.amit.exception.UpdateNotAllowedException;
 import com.amit.repository.AccountRepository;
 import com.amit.repository.AddressRepository;
@@ -197,6 +198,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 			}
 		}
 		
+		EmployeeDto employeeDto = modelMapper.map(employeeEntity, EmployeeDto.class);
+		
+		return employeeDto;
+	}
+
+	@Override
+	public EmployeeDto findCustomerUsingCustomQuery(String empName) {
+		List<EmployeeEntity> empList = empRepo.getEmployeeByNameUsingCustomQuery(empName);
+		
+		EmployeeEntity employeeEntity = empList.stream().findFirst()
+				.orElseThrow(() -> new ResourceNotFoundException("Employee", "EmployeeName", empName));
 		EmployeeDto employeeDto = modelMapper.map(employeeEntity, EmployeeDto.class);
 		
 		return employeeDto;

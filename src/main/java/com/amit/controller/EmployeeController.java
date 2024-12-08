@@ -23,6 +23,7 @@ import com.amit.dto.EmployeeListDto;
 import com.amit.dto.ProjectDto;
 import com.amit.service.IEmployeeService;
 import com.amit.service.IProjectServcie;
+import com.amit.util.SqlQueryUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -37,7 +38,11 @@ public class EmployeeController {
 	@Autowired
 	private IEmployeeService empService;
 	
-	@Autowired IProjectServcie projectService;
+	@Autowired
+	IProjectServcie projectService;
+	
+	@Autowired
+	private SqlQueryUtil queryUtil;
 	
 	@PostMapping("/create")
 	public ResponseEntity<EmployeeDto> createNewEmployeeWithAddress(@Valid @RequestBody EmployeeDto employeeDto){
@@ -110,6 +115,19 @@ public class EmployeeController {
 		EmployeeDto employeeDto = projectService.associateNewProject(employeeId, projectId);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(employeeDto);
+	}
+	
+	@GetMapping("/custom-query-search/{empName}")
+	public ResponseEntity<EmployeeDto> searchEmployeeByCustomQuery(@PathVariable String empName){
+		
+		EmployeeDto employeeDto = empService.findCustomerUsingCustomQuery(empName);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(employeeDto);
+	}
+	
+	@GetMapping("/query")
+	public String getQuery() {
+		return queryUtil.getSql("SELECT_CUSTOMER_BY_NAME_WITH_ADDRESS");
 	}
 
 }

@@ -19,7 +19,8 @@ import io.swagger.v3.oas.annotations.info.License;
      license = @License(name = "Appache 2.0", url = "https://www.google.com")))
 @EntityScan("com.amit.entity")
 @EnableJpaRepositories("com.amit.repository")
-@ComponentScan({"com.amit.service.impl", "com.amit.exception", "com.amit.controller", "com.amit.config"})
+@ComponentScan({"com.amit.service.impl", "com.amit.exception", "com.amit.controller",
+                 "com.amit.config", "com.amit.util"})
 public class JpaMappingDemoApplication {
 
 	public static void main(String[] args) {

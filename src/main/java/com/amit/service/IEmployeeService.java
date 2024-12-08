@@ -22,4 +22,6 @@ public interface IEmployeeService {
 
 	public EmployeeDto updateAccount(Integer employeeId, Integer accountId, AccountDto accountDto);
 
+	public EmployeeDto findCustomerUsingCustomQuery(String empName);
+
 }
