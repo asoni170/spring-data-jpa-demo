@@ -125,6 +125,14 @@ public class EmployeeController {
 		return ResponseEntity.status(HttpStatus.OK).body(employeeDto);
 	}
 	
+	@GetMapping("/names")
+	public ResponseEntity<List<EmployeeDto>> searchEmployeeByEmpNames(@RequestParam List<String> empNames){
+		
+		List<EmployeeDto> empList = empService.findEmployeeByNames(empNames);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(empList);
+	}
+	
 	@GetMapping("/query")
 	public String getQuery() {
 		return queryUtil.getSql("SELECT_CUSTOMER_BY_NAME_WITH_ADDRESS");

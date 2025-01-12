@@ -31,6 +31,7 @@ import com.amit.exception.UpdateNotAllowedException;
 import com.amit.repository.AccountRepository;
 import com.amit.repository.AddressRepository;
 import com.amit.repository.EmployeeRepository;
+import com.amit.repository.query.EmployeeDao;
 import com.amit.service.IEmployeeService;
 import com.amit.specifications.EmployeeSpecification;
 
@@ -51,6 +52,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
 	
 	@Autowired
 	private AccountRepository accountRepo;
+	
+	@Autowired
+	private EmployeeDao empDao;
 
 	@Override
 	public EmployeeDto createNewEmployee(EmployeeDto employeeDto) {
@@ -212,6 +216,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		EmployeeDto employeeDto = modelMapper.map(employeeEntity, EmployeeDto.class);
 		
 		return employeeDto;
+	}
+
+	@Override
+	public List<EmployeeDto> findEmployeeByNames(List<String> empNames) {
+		List<EmployeeEntity> empEntityList = empDao.fetchEmployeesByName(empNames);
+		
+		List<EmployeeDto> empDtoList = new ArrayList<EmployeeDto>();
+		
+		empEntityList.stream().forEach(emp -> empDtoList.add(modelMapper.map(emp, EmployeeDto.class)));
+		
+		return empDtoList;
 	}
 
 }

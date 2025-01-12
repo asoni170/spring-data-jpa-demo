@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.info.License;
 @EntityScan("com.amit.entity")
 @EnableJpaRepositories("com.amit.repository")
 @ComponentScan({"com.amit.service.impl", "com.amit.exception", "com.amit.controller",
-                 "com.amit.config", "com.amit.util"})
+                 "com.amit.config", "com.amit.util", "com.amit.repository.query"})
 public class JpaMappingDemoApplication {
 
 	public static void main(String[] args) {

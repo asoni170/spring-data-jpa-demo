@@ -24,4 +24,6 @@ public interface IEmployeeService {
 
 	public EmployeeDto findCustomerUsingCustomQuery(String empName);
 
+	public List<EmployeeDto> findEmployeeByNames(List<String> empNames);
+
 }
