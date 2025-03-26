@@ -65,7 +65,7 @@ public class EmployeeController {
 			@Positive @RequestParam(required = false) Integer pageNumber,
 			@Positive @RequestParam(required = false) Integer pageSize){
 		
-		pageNumber = pageNumber != null ? pageNumber : 1;
+		pageNumber = pageNumber != null ? pageNumber : 1
 		pageSize = pageSize != null ? pageSize : 5;
 		
 		EmployeeListDto returnObject = empService.findAllEmployee(employeeId, employeeName,employeeEmail, department, city, pincode,
